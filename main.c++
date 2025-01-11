@@ -6,10 +6,13 @@ using namespace std;
 
 int main(){
 
+    validarExistenciaArchivoDatos();
 
-    cout << "asd" << endl;
-    ingresarValores();
-    logoPixel();
-    guardarDatos();
+    //leerDatos();
+
+    //cout << "asd" << endl;
+    //ingresarValores();
+    //logoPixel();
+    //guardarDatos();
     return 0;
 }
