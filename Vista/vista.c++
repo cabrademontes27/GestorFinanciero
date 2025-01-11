@@ -3,9 +3,11 @@
 #include <string>
 #include <ctime>
 #include <cstring>
+#include <sstream>
 using namespace std;
 
 
+void guardarDatos();
 
 int logoPixel(){
    ifstream archivoEntrada("Vista/banner.txt");
@@ -23,10 +25,10 @@ void cargarDocInstrucciones(){
     //rediriger a documento
 }
 
-void  crearFileDatosIngresados(string primerLogin,string nombrePropio,string nombreGestor,string correo, string diasDeEnvios){
+void  crearArchivoDatosIngresados(string primerLogin,string nombrePropio,string nombreGestor,string correo, string diasDeEnvios){
     ofstream archivo("DatosLogin/Datos.txt");
     if(archivo.is_open()){
-        archivo << primerLogin + "\n";
+        archivo << primerLogin ;
         archivo << nombrePropio + "\n";
         archivo << nombreGestor + "\n";
         archivo << correo + "\n";
@@ -38,11 +40,35 @@ void  crearFileDatosIngresados(string primerLogin,string nombrePropio,string nom
 } 
 
 void validarExistenciaArchivoDatos(){
-    // cada que se corra el programa, validar la existencia 
-    // del archivo de los datos, si no, redirigir para 
-    //guardarDatos()
+    string linea;
+    ifstream archivo("DatosLogin/Datos.txt");
+
+    //valida si exciste
+    if(!archivo){
+        //ni existe el archivo, funcion
+        cout << "No existe el documentos de los datos";
+        guardarDatos();
+    }   
+    //valida si esta vacio
+    if(!getline(archivo,linea)){
+        cout << "los datos fueron modificados, se redirigera... \n" << endl;
+        guardarDatos();
+    }
 }
 
+string leerDatos(){
+    //deberia agregar a qui el validar la existencia del
+    //archivo datos ??
+    // deberia leer los datos y separarlos
+    ifstream archivo("DatosLogin/Datos.txt");
+    string linea;
+    string primerLogin, nombrePropio,nombreGestor,correo,diasEnvios;
+    while(getline(archivo,linea)){
+        istringstream separador(linea);
+        separador >> primerLogin >> nombrePropio >> nombreGestor >> correo >> diasEnvios;
+    }
+    return " ";
+}
 
 void guardarDatos(){
     cout << "[1]   Breve introduccion, si desea leer la instruccion " << endl;
@@ -75,18 +101,5 @@ void guardarDatos(){
     time_t fechaDeIncio = time(0);
     string fechaPrimerLogin = ctime(&fechaDeIncio);
     cout << fechaPrimerLogin << endl;
-    crearFileDatosIngresados(fechaPrimerLogin,nombrePropio,nombreDelGestor,correo,cantidadDeDias);
-}
-
-
-void leerFecha() {
-    std::ifstream archivo("registro.txt");  // Abre el archivo para leer
-    if (archivo.is_open()) {
-        std::string fecha;
-        std::getline(archivo, fecha);  // Lee la primera línea del archivo
-        archivo.close();
-        std::cout << "Fecha registrada: " << fecha << std::endl;
-    } else {
-        std::cerr << "No se pudo abrir el archivo." << std::endl;
-    }
+    crearArchivoDatosIngresados(fechaPrimerLogin,nombrePropio,nombreDelGestor,correo,cantidadDeDias);
 }
