@@ -1,18 +1,11 @@
 #include <iostream>
-#include "Vista/vista.c++"
 #include "Calculos/calculos.c++"
+#include "Vista/VistaMenu.c++"
+
 
 using namespace std;
 
 int main(){
-
-    validarExistenciaArchivoDatos();
-
-    //leerDatos();
-
-    //cout << "asd" << endl;
-    //ingresarValores();
-    //logoPixel();
-    //guardarDatos();
+    run();
     return 0;
 }
