@@ -1,6 +1,6 @@
-ingresar gastos
+ingresar gastos-------------------------------------
 ingresar ingresos mensuales
-ingresar ingresos quincenales
+ingresar ingresos quincenales-------------------------------------
 deudas por pagar al mes
     spotify
 pagos pendientes
